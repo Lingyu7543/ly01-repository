@@ -1,6 +1,5 @@
----
 - hosts: all
-  remote_user: root
+  remote_user: root
   tasks:
     - name: "copy files to remote host"
       copy:
