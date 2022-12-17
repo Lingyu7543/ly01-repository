@@ -5,7 +5,7 @@
     - name:"copy files to remote host"
       copy:
         src={{item.src}}        
-               dest={{item.dest}}
+        dest={{item.dest}}
       with_items:
         - src:/usr/local/src/jdk-8u281-linux-x64.tar.gz
           dest:/usr/local/
