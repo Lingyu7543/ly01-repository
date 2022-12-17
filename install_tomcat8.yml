@@ -2,30 +2,30 @@
 - hosts: all
   remote_user: root
   tasks:
-    - name:"copy files to remote host"
-      copy:
+   - name: "copy files to remote host"
+     copy:
         src={{item.src}}        
         dest={{item.dest}}
-      with_items:
+     with_items:
         - src:/usr/local/src/jdk-8u281-linux-x64.tar.gz
           dest:/usr/local/
         - src:/usr/local/src/apache-tomcat-8.5.84.tar.gz
           dest:/usr/local/
-    - name:"install jdk"
-      shell:cd /usr/local/&& tar xf jdk-8u281-linux-x64.tar.gz
-    - name: add config to profile
-      shell:/bin/echo {{item}} >> /etc/profile
-      with_items:
-             - export JAVA_HOME=/root/jdk1.8.0_281
-             - export PATH=$JAVA_HOME/bin:$PATH
-             - export CLASSPATH=:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-    - name: take effect
-      shell: source /etc/profile
-    - name: test
-      shell: java -version
-    - name:"install tomcat8"
-      shell: cd /usr/local/&& tar xf apache-tomcat-8.5.84.tar.gz
-    - name:"rename file"
-      shell: mv /usr/local/apache-tomcat-8.5.84/usr/local/tomcat8
-    - name:"start tomcat"
-      shell: 'nohup /usr/local/tomcat8/bin/startup.sh &'
+   - name: "install jdk"
+     shell:cd /usr/local/&& tar xf jdk-8u281-linux-x64.tar.gz
+   - name: "add config to profile"
+     shell:/bin/echo {{item}} >> /etc/profile
+     with_items:
+       - export JAVA_HOME=/root/jdk1.8.0_281
+       - export PATH=$JAVA_HOME/bin:$PATH
+       - export CLASSPATH=:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+   - name: "take effect"
+     shell: source /etc/profile
+   - name: "test"
+     shell: java -version
+   - name: "install tomcat8"
+     shell: cd /usr/local/&& tar xf apache-tomcat-8.5.84.tar.gz
+   - name: "rename file"
+     shell: mv /usr/local/apache-tomcat-8.5.84/usr/local/tomcat8
+   - name: "start tomcat"
+     shell: 'nohup /usr/local/tomcat8/bin/startup.sh &'
